@@ -15,14 +15,29 @@ class Curator
   end
 
   def find_artist_by_id(id)
-    @artists.find_all do |artist|
+    @artists.find do |artist|
       artist[:id] == id
     end
   end
 
   def find_photograph_by_id(id)
-    @photographs.find_all do |photograph|
+    @photographs.find do |photograph|
       photograph[:id] == id
     end
   end
+
+  def find_photographs_by_artist(artist)
+    @photographs.select do |photograph|
+      photograph[:artist_id] == artist[:id]
+    end
+  end
+
+  # def artists_with_multiple_photographs
+  #   grouped_photographs = @photographs.max_by{|photograph|photograph[:artist_id]}
+  # end
+
+  # def photographs_taken_by_artists_from(string)
+  #   @photographs.select do |photograph|
+  #     photograph[:country] == string
+  # end
 end
